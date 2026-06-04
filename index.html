@@ -84,7 +84,11 @@
     }
     .cursor.hover { width: 20px; height: 20px; background: var(--gold-dark); }
     .cursor-ring.hover { width: 52px; height: 52px; border-color: var(--gold-dark); opacity: 0.4; }
-
+@media (pointer: coarse) {
+      .cursor, .cursor-ring {
+        display: none !important;
+      }
+    }
     /* ===================== SVG GRAIN OVERLAY ===================== */
     body::before {
       content: '';
