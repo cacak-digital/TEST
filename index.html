@@ -1009,7 +1009,24 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
+    }.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolone na desktopu */
+    gap: 20px;
+    justify-items: center;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr; /* 1 kolona na mobilnom */
+        gap: 30px;
+        text-align: center;
     }
+}
+
+.stat-num {
+    will-change: transform; /* Pomaže kod performansi animacije */
+}
   </style>
 </head>
 <body>
@@ -1097,7 +1114,7 @@
             </div>
             <div class="trust-badge">
               <span class="icon" aria-hidden="true">✓</span>
-              Dostava Čačak
+              Lično preuzimanje Čačak
             </div>
           </div>
         </div>
