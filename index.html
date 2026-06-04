@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mlekara GAJ Čačak — autentičan kajmak, sveže mleko i sirevi od poverenja. Direktno iz Čačka, na vaš sto." />
+  <meta property="og:title" content="Mlekara GAJ Čačak — Pravi ukus, bez kompromisa" />
+  <meta property="og:description" content="Kajmak, mleko, sir, pavlaka, jogurt — tradicionalni srpski mlečni proizvodi." />
+  <title>Mlekara GAJ Čačak — Pravi ukus, bez kompromisa</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥛</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===================== CSS VARIABLES ===================== */
+    :root {
+      --cream: #EAF4FF;
+      --warm-white: #F8FBFF;
+      --gold: #1D4ED8;
+      --gold-light: #60A5FA;
+      --gold-dark: #1E40AF;
+      --deep-green: #0F3B72;
+      --deep-green-light: #2563EB;
+      --clay: #475569;
+      --milk: #FFFEF7;
+      --shadow: rgba(15, 60, 114, 0.12);
+      --shadow-warm: rgba(29, 78, 216, 0.15);
+      --text-dark: #0f274f;
+      --text-muted: rgba(15, 60, 114, 0.65);
+      --footer-bg: #082048;
+      --radius: 20px;
+      --radius-sm: 12px;
+      --transition: all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ===================== RESET & BASE ===================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 110px; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--deep-green);
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { font-family: inherit; cursor: pointer; }
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+      box-shadow: 0 0 0 4px rgba(29,78,216,0.18);
+    }
+    input, textarea, select { font-family: inherit; }
+
+    /* ===================== CUSTOM CURSOR ===================== */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99999;
+      transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      z-index: 99998;
+      transition: transform 0.45s cubic-bezier(0.17, 0.67, 0.83, 0.67), width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+      transform: translate(-50%, -50%);
+      opacity: 0.6;
+    }
+    .cursor.hover { width: 20px; height: 20px; background: var(--gold-dark); }
+    .cursor-ring.hover { width: 52px; height: 52px; border-color: var(--gold-dark); opacity: 0.4; }
+
+    /* ===================== SVG GRAIN OVERLAY ===================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ===================== SCROLL ANIMATIONS ===================== */
+    .animate {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .animate.visible { opacity: 1; transform: translateY(0); }
+    .animate-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .animate-left.visible { opacity: 1; transform: translateX(0); }
+    .animate-right { opacity: 0; transform: translateX(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .animate-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ===================== NAVIGATION ===================== */
+    nav#nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+    nav#nav.scrolled {
+      background: rgba(239, 246, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 32px var(--shadow);
+      padding: 14px 5%;
+    }
+    nav.footer-links {
+      position: static;
+    }
+    .nav-logo { display: flex; flex-direction: column; line-height: 1; }
+    .nav-logo-main {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--deep-green);
+      letter-spacing: 0.06em;
+    }
+    .nav-logo-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--deep-green);
+      position: relative;
+      padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 1.5px;
+      background: var(--gold);
+      transition: left 0.3s ease, right 0.3s ease;
+    }
+    .nav-links a:hover::after { left: 0; right: 0; }
+    .nav-cta {
+      background: var(--gold);
+      color: white !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.06em;
+      transition: var(--transition);
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold-dark); transform: translateY(-1px); box-shadow: 0 6px 20px var(--shadow-warm); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 1100;
+    }
+    .hamburger span {
+      width: 26px; height: 2px;
+      background: var(--deep-green);
+      border-radius: 2px;
+      transition: var(--transition);
+      display: block;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--warm-white);
+      z-index: 1050;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      padding-top: 130px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      overflow-y: auto;
+      text-align: center;
+    }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); }
+    .mobile-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      letter-spacing: 0.04em;
+      padding: 12px 0;
+      width: 100%;
+      max-width: 320px;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    /* ===================== HERO ===================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 60%, #f0ece0 100%);
+      padding: 120px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-blob-1 {
+      position: absolute;
+      top: -120px; right: -80px;
+      width: 600px; height: 600px;
+      background: radial-gradient(ellipse, rgba(29,78,216,0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-blob-2 {
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse, rgba(15,60,114,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-text {}
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50px;
+      padding: 7px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      background: rgba(29,78,216,0.06);
+    }
+    .hero-h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--deep-green);
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--clay);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-secondary { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 18px; margin-top: 32px; }
+    .hero-btns-bottom { width: fit-content; flex-wrap: wrap; }
+    .hero-btns-bottom a { margin-right: 16px; }
+    .btn-primary {
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 16px 34px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold-dark);
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+    }
+    .btn-primary:hover::before { transform: translateX(0); }
+    .btn-primary span { position: relative; z-index: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px var(--shadow-warm); }
+    .btn-outline {
+      background: transparent;
+      color: var(--deep-green);
+      border: 2px solid var(--deep-green);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      transition: var(--transition);
+    }
+    .btn-outline:hover { background: var(--deep-green); color: white; transform: translateY(-2px); }
+    .trust-badges { display: flex; gap: 28px; flex-wrap: wrap; }
+    .trust-badge {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--text-muted);
+    }
+    .trust-badge .icon {
+      width: 22px; height: 22px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: white; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .hero-visual { position: relative; }
+    .hero-img-wrap {
+      border-radius: 28px;
+      overflow: hidden;
+      transform: rotate(-2.5deg);
+      box-shadow: 20px 30px 80px var(--shadow), 0 0 0 8px rgba(29,78,216,0.08);
+      aspect-ratio: 4/5;
+      max-height: 580px;
+      transition: transform 0.5s ease;
+    }
+    .hero-img-wrap:hover { transform: rotate(-1deg) scale(1.01); }
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .hero-img-wrap:hover img { transform: scale(1.04); }
+    .hero-float-card {
+      position: absolute;
+      bottom: -20px; left: -30px;
+      background: rgba(229, 241, 255, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      box-shadow: 0 16px 48px var(--shadow);
+      border: 1px solid rgba(29,78,216,0.2);
+      animation: floatCard 3s ease-in-out infinite;
+    }
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-card-title { font-size: 0.82rem; font-weight: 700; color: var(--deep-green); margin-bottom: 4px; }
+    .float-card-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; }
+    .float-card-sub { font-size: 0.73rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ===================== STATS ===================== */
+    #stats {
+      background: var(--deep-green);
+      padding: 72px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    #stats::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(29,78,216,0.05) 100%);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    .stat-item { padding: 20px; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 800;
+      color: white;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: 0.88rem; font-weight: 400; color: rgba(255,255,255,0.8); letter-spacing: 0.05em; }
+    .stat-sep {
+      width: 1px;
+      background: rgba(255,255,255,0.25);
+      align-self: stretch;
+      margin: 20px 0;
+    }
+
+    /* ===================== SHARED SECTION STYLES ===================== */
+    section { padding: 100px 5%; scroll-margin-top: 120px; }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--deep-green);
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--clay);
+      margin-bottom: 60px;
+    }
+    .section-head-center { text-align: center; }
+
+    /* ===================== PRODUCTS ===================== */
+    #products { background: var(--cream); }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .product-card {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 8px 32px var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(29,78,216,0.1);
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px var(--shadow), 0 0 0 1px rgba(29,78,216,0.2); }
+    .product-card.featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; }
+    .product-img {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--warm-white);
+    }
+    .product-card.featured .product-img { height: 100%; min-height: 280px; }
+    .product-img img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+    .product-card:hover .product-img img { transform: scale(1.03); }
+    .product-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--gold);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 50px;
+      letter-spacing: 0.05em;
+    }
+    .product-body { padding: 24px; }
+    .product-card.featured .product-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--deep-green);
+      margin-bottom: 10px;
+    }
+    .product-card.featured .product-name { font-size: 1.8rem; }
+    .product-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
+    .product-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .chip {
+      background: rgba(15,60,114,0.07);
+      color: var(--deep-green);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
+      letter-spacing: 0.04em;
+    }
+    .product-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: gap 0.3s ease;
+    }
+    .product-link:hover { gap: 14px; }
+    .product-icon { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+
+    /* ===================== ABOUT ===================== */
+    #about { background: var(--warm-white); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .about-visual { position: relative; }
+    .about-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 24px 32px 80px var(--shadow);
+      aspect-ratio: 4/5;
+    }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; }
+    .farm-image {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-top: 32px;
+      box-shadow: 0 24px 50px rgba(15, 60, 114, 0.12);
+    }
+    .farm-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+    .about-deco {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      background: var(--gold);
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 800;
+      padding: 20px 28px;
+      border-radius: var(--radius-sm);
+      transform: rotate(-12deg);
+      line-height: 1;
+      box-shadow: 0 16px 40px var(--shadow-warm);
+    }
+    .about-text {}
+    .about-intro { font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
+    .about-quote {
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+      margin: 32px 0;
+    }
+    .about-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--clay);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .about-quote cite { font-size: 0.83rem; color: var(--text-muted); font-style: normal; font-weight: 600; }
+    .timeline { margin-top: 32px; position: relative; padding-left: 28px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 6px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), rgba(29,78,216,0.1));
+    }
+    .timeline-item { margin-bottom: 20px; position: relative; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px; top: 6px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year { font-size: 0.72rem; font-weight: 700; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 2px; }
+    .timeline-text { font-size: 0.9rem; color: var(--deep-green); font-weight: 500; }
+
+    /* ===================== WHY US ===================== */
+    #why { background: var(--cream); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .why-card {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border: 1px solid rgba(29,78,216,0.1);
+      box-shadow: 0 6px 24px var(--shadow);
+      transition: var(--transition);
+    }
+    .why-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px var(--shadow); }
+    .why-icon {
+      width: 56px; height: 56px;
+      background: rgba(29,78,216,0.1);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .why-icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--deep-green);
+      margin-bottom: 10px;
+    }
+    .why-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ===================== PARALLAX BANNER ===================== */
+    #parallax-banner {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+    .parallax-bg {
+      position: absolute;
+      inset: -60px;
+      background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&auto=format&fit=crop') center/cover no-repeat;
+      will-change: transform;
+    }
+    .parallax-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(29,78,216,0.82) 0%, rgba(15,32,86,0.78) 100%);
+    }
+    .parallax-content { position: relative; z-index: 1; color: white; padding: 0 20px; }
+    .parallax-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .parallax-content p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      opacity: 0.85;
+      margin-bottom: 36px;
+    }
+    .btn-gold-lg {
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 18px 44px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      transition: var(--transition);
+      display: inline-block;
+    }
+    .btn-gold-lg:hover { background: var(--gold-dark); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(29,78,216,0.4); }
+
+    /* ===================== WHERE TO BUY ===================== */
+    #where { background: var(--warm-white); }
+    .where-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 16px 56px var(--shadow);
+      height: 400px;
+    }
+    .map-container iframe { width: 100%; height: 100%; border: none; }
+    .where-info {}
+    .hours-card {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 28px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(29,78,216,0.15);
+    }
+    .hours-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--deep-green); margin-bottom: 16px; }
+    .hours-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(15,60,114,0.08); font-size: 0.9rem; }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-day { font-weight: 600; color: var(--deep-green); }
+    .hours-time { color: var(--text-muted); }
+    .hours-time.closed { color: var(--clay); }
+    .where-note {
+      background: rgba(29,78,216,0.08);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      font-size: 0.88rem;
+      color: var(--gold-dark);
+      border-left: 3px solid var(--gold);
+      line-height: 1.6;
+    }
+    .where-intro { font-size: 0.95rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 28px; }
+
+    /* ===================== CONTACT ===================== */
+    #contact { background: var(--deep-green); padding: 100px 5%; }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: minmax(320px, 1.1fr) minmax(420px, 1fr);
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    .contact-left,
+    .contact-form-wrap {
+      min-width: 0;
+    }
+    .contact-left { color: white; }
+    .contact-left .section-title { color: white; margin-bottom: 12px; }
+    .contact-left .section-label { color: rgba(255,255,255,0.75); }
+    .contact-intro { font-size: 1rem; color: rgba(255,255,255,0.85); line-height: 1.75; margin-bottom: 36px; }
+    .contact-info-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 40px; }
+    .contact-info-item { display: flex; align-items: center; gap: 16px; }
+    .contact-info-icon {
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(255,255,255,0.24);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .contact-info-icon:hover { background: rgba(255,255,255,0.08); border-color: var(--gold); }
+    .contact-info-icon svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-info-text a, .contact-info-text span { color: rgba(255,255,255,0.95); font-size: 0.95rem; display: block; transition: color 0.2s; }
+    .contact-info-text a:hover { color: var(--gold); }
+    .contact-info-sub { font-size: 0.75rem; color: rgba(255,255,255,0.65); margin-top: 2px; }
+    .social-row { display: flex; align-items: center; gap: 12px; }
+    .social-handle {
+      color: rgba(255,255,255,0.95);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .social-handle:hover { color: var(--gold); }
+    .social-icon {
+      width: 44px; height: 44px;
+      border: 1.5px solid rgba(255,255,255,0.24);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .social-icon:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-3px); }
+    .social-icon svg { width: 20px; height: 20px; stroke: white; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+    .social-icon:hover svg { stroke: white; }
+
+    /* Contact Form */
+    .contact-form-wrap {
+      background: var(--warm-white);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.16);
+    }
+    .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .form-group { position: relative; margin-bottom: 20px; }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--deep-green);
+      margin-bottom: 8px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      background: rgba(15,60,114,0.04);
+      border: 1.5px solid rgba(15,60,114,0.18);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.92rem;
+      color: var(--deep-green);
+      transition: var(--transition);
+      outline: none;
+      appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: var(--gold);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(29,78,216,0.12);
+    }
+    .form-group.error input, .form-group.error select, .form-group.error textarea {
+      border-color: #e53e3e;
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-check { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+    .form-check input[type="checkbox"] {
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .form-check label { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; font-weight: normal; text-transform: none; letter-spacing: 0; }
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: white;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-submit:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 10px 32px var(--shadow-warm); }
+    .form-success {
+      display: none;
+      background: rgba(15,60,114,0.07);
+      border: 1.5px solid rgba(15,60,114,0.2);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      animation: slideDown 0.4s ease;
+    }
+    .form-success.show { display: block; }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    .form-success p { color: var(--deep-green); font-weight: 600; font-size: 0.95rem; }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: var(--footer-bg);
+      padding: 80px 5% 0;
+      color: rgba(255,255,255,0.75);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .footer-brand-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: rgba(29,78,216,0.7);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 24px; line-height: 1.6; }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social-icon {
+      width: 38px; height: 38px;
+      border: 1px solid rgba(29,78,216,0.3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .footer-social-icon:hover { background: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+    .footer-social-icon svg { width: 17px; height: 17px; stroke: white; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.2s; }
+    .footer-social-icon:hover svg { stroke: white; }
+    .footer-col-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { font-size: 0.88rem; color: rgba(255,255,255,0.55); transition: color 0.25s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .footer-contact-item span { font-size: 0.87rem; color: rgba(255,255,255,0.85); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.12);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .footer-policy { font-size: 0.78rem; color: rgba(29,78,216,0.5); transition: color 0.2s; }
+    .footer-policy:hover { color: var(--gold); }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 1023px) {
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-sep { display: none; }
+    }
+    @media (max-width: 767px) {
+      section { padding: clamp(60px, 8vw, 80px) 5%; }
+      nav#nav { padding: 16px 5%; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: 0; }
+      .hero-img-wrap { max-height: 320px; transform: none; aspect-ratio: 16/9; }
+      .hero-h1 { font-size: 2.6rem; }
+      .hero-sub { font-size: 1rem; }
+      .hero-float-card { left: 16px; bottom: -12px; }
+      .hero-btns { flex-direction: column; gap: 14px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .product-card.featured { grid-column: span 1; display: block; }
+      .product-card.featured .product-img { height: 220px; min-height: auto; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-deco { right: 16px; bottom: -16px; font-size: 3.5rem; }
+      .why-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .where-inner { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .trust-badges { gap: 16px; }
+      .mobile-menu { padding-top: 140px; }
+      .mobile-menu a { font-size: 1.9rem; }
+      .nav-logo-main { font-size: 1.9rem; }
+      .nav-logo-sub { font-size: 0.78rem; }
+    }
+    @media (max-width: 480px) {
+      nav#nav { padding: 14px 4%; }
+      .hero-h1 { font-size: 2.2rem; }
+      .hero-sub { font-size: 0.98rem; }
+      .hero-img-wrap { max-height: 260px; }
+      .hero-btns { gap: 12px; }
+      .mobile-menu a { font-size: 1.6rem; max-width: 100%; }
+      .products-grid { gap: 20px; }
+      .footer-bottom { padding: 18px 0; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .hero-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .hero-h1 { font-size: 3.2rem; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-card.featured { grid-column: span 2; }
+      .about-inner { gap: 40px; }
+      .where-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigacija">
+    <a href="#hero" class="mobile-nav-link">Početna</a>
+    <a href="#products" class="mobile-nav-link">Proizvodi</a>
+    <a href="#about" class="mobile-nav-link">O nama</a>
+    <a href="#where" class="mobile-nav-link">Gde kupiti</a>
+    <a href="#contact" class="mobile-nav-link">Kontakt</a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="nav" role="navigation" aria-label="Glavna navigacija">
+    <a href="#hero" class="nav-logo" aria-label="Mlekara GAJ — početna">
+      <span class="nav-logo-main">GAJ</span>
+      <span class="nav-logo-sub">Mlekara</span>
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="#hero">Početna</a></li>
+      <li><a href="#products">Proizvodi</a></li>
+      <li><a href="#about">O nama</a></li>
+      <li><a href="#where">Gde kupiti</a></li>
+      <li><a href="#contact" class="nav-cta">Kontakt</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-blob-1" aria-hidden="true"></div>
+      <div class="hero-blob-2" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-badge animate">
+            <span>🌿</span> Čačak · Pravi ukus · Od srca
+          </div>
+          <h1 class="hero-h1 animate delay-1" id="hero-title">
+            Pravi mlečni<br>
+            proizvodi.<br>
+            <em>Bez kompromisa.</em>
+          </h1>
+          <p class="hero-sub animate delay-2">
+            Mlekara GAJ — autentičan kajmak, sveže mleko i sirevi od poverenja. Direktno iz Čačka, na vaš sto.
+          </p>
+        </div>
+        <div class="hero-visual animate-right">
+          <div class="hero-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=800&auto=format&fit=crop"
+              alt="Svež domaći kajmak na rustikalnoj drvenoj dasci"
+              loading="eager"
+            />
+          </div>
+          <div class="hero-float-card" aria-label="Ocena kupaca">
+            <p class="float-card-title">🏆 Omiljeni kajmak u Čačku</p>
+            <p class="float-card-stars">★★★★★</p>
+            <p class="float-card-sub">Ocena kupaca: 4.9 / 5</p>
+          </div>
+        </div>
+        <div class="hero-secondary animate delay-4">
+          <div class="hero-btns hero-btns-bottom">
+            <a href="#products" class="btn-primary" aria-label="Pogledaj naše proizvode">
+              <span>Naši proizvodi</span>
+            </a>
+            <a href="#contact" class="btn-outline">Pozovite nas</a>
+          </div>
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <span class="icon" aria-hidden="true">✓</span>
+              100% prirodno
+            </div>
+            <div class="trust-badge">
+              <span class="icon" aria-hidden="true">✓</span>
+              Bez aditiva
+            </div>
+            <div class="trust-badge">
+              <span class="icon" aria-hidden="true">✓</span>
+              Dostava Čačak
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section id="stats" aria-label="Naši rezultati">
+      <div class="stats-grid">
+        <div class="stat-item animate">
+          <div class="stat-num" data-target="2021" data-suffix="">2021.</div>
+          <div class="stat-label">Godina osnivanja</div>
+        </div>
+        <div class="stat-item animate delay-1">
+          <div class="stat-num" data-target="12" data-suffix="+">0+</div>
+          <div class="stat-label">Vrsta proizvoda</div>
+        </div>
+        <div class="stat-item animate delay-2">
+          <div class="stat-num" data-target="5000" data-suffix="+">0+</div>
+          <div class="stat-label">Zadovoljnih mušterija</div>
+        </div>
+        <div class="stat-item animate delay-3">
+          <div class="stat-num" data-target="30" data-suffix="+">0+</div>
+          <div class="stat-label">Prodajnih mesta</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products" aria-labelledby="products-title">
+      <div class="section-head-center animate">
+        <span class="section-label">Naši proizvodi</span>
+        <h2 class="section-title" id="products-title">Što ga napravimo</h2>
+        <p class="section-sub">...ostaje u sećanju</p>
+      </div>
+      <div class="products-grid" style="max-width:1300px;margin:0 auto;">
+
+        <!-- Featured: Gaj mladi kajmak -->
+        <article class="product-card featured animate" aria-label="Gaj mladi kajmak 450g KG 1">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/kajmak450g.jpeg"
+              alt="Gaj mladi kajmak 450g"
+              loading="lazy"
+            />
+            <span class="product-badge" aria-label="Naš ponos">⭐ Naš ponos</span>
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧈</span>
+            <h3 class="product-name">Gaj mladi kajmak 450g KG 1</h3>
+            <p class="product-desc">Svež mladi kajmak sa mekanom teksturom i blagim ukusom. Spreman za serviranje odmah.</p>
+            <div class="product-chips">
+              <span class="chip">450g</span>
+              <span class="chip">KG 1</span>
+              <span class="chip">Punomasan</span>
+            </div>
+            <a href="#contact" class="product-link" aria-label="Poruči kajmak">Poruči → <span>→</span></a>
+          </div>
+        </article>
+
+        <!-- Gaj kajmak 150g -->
+        <article class="product-card animate delay-1">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/kajmak150g.jpeg"
+              alt="Gaj kajmak 150g"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🥛</span>
+            <h3 class="product-name">Gaj kajmak 150g KOM 10</h3>
+            <p class="product-desc">Kremasti kajmak u praktičnom pakovanju — savršen za doručak, pite i sve omiljene recepte.</p>
+            <div class="product-chips">
+              <span class="chip">150g</span>
+              <span class="chip">KOM 10</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+        <!-- Gaj Sir 25% mm 2kg -->
+        <article class="product-card animate delay-2">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/2kg-25.jpg"
+              alt="Gaj Sir 25% mm 2kg"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧀</span>
+            <h3 class="product-name">Gaj Sir 25% mm 2kg KG 2</h3>
+            <p class="product-desc">Kremasti sir sa 25% mlečne masti, idealan za upotrebu u kuhinji i na stolu.</p>
+            <div class="product-chips">
+              <span class="chip">25% mm</span>
+              <span class="chip">2kg</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+        <!-- Gaj Sir 25% mm 5kg -->
+        <article class="product-card animate delay-3">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/sirmek5kg-25.png"
+              alt="Gaj Sir 25% mm 5kg"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧀</span>
+            <h3 class="product-name">Gaj Sir 25% mm 5kg KG 5</h3>
+            <p class="product-desc">Veliko pakovanje sira sa 25% mlečne masti, pogodnog za veće prodajne količine.</p>
+            <div class="product-chips">
+              <span class="chip">25% mm</span>
+              <span class="chip">5kg</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+        <!-- Gaj polutvrdi punomasni sir 5kg -->
+        <article class="product-card animate delay-1">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/punomasni5kg.png"
+              alt="Gaj polutvrdi punomasni sir 5kg"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧀</span>
+            <h3 class="product-name">Gaj polutvrdi punomasni sir 5kg KG 5</h3>
+            <p class="product-desc">Punomasni polutvrdi sir u velikom pakovanju, savršen za kuhinje i profesionalnu upotrebu.</p>
+            <div class="product-chips">
+              <span class="chip">Punomasni</span>
+              <span class="chip">5kg</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+        <!-- Gaj sir 25% 0.6kg -->
+        <article class="product-card animate delay-2">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/0.6kg-25.png"
+              alt="Gaj sir 25% 0.6kg"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧀</span>
+            <h3 class="product-name">Gaj sir 25% 0.6kg KOM</h3>
+            <p class="product-desc">Manje pakovanje sira sa 25% mlečne masti, praktično za domaće korišćenje.</p>
+            <div class="product-chips">
+              <span class="chip">0.6kg</span>
+              <span class="chip">KOM</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+        <!-- Gaj polutvrdi punomasni sir 500g -->
+        <article class="product-card animate delay-3">
+          <div class="product-img">
+            <img
+              src="PROIZVODI/punomasni500g.png"
+              alt="Gaj polutvrdi punomasni sir 500g"
+              loading="lazy"
+            />
+          </div>
+          <div class="product-body">
+            <span class="product-icon" aria-hidden="true">🧀</span>
+            <h3 class="product-name">Gaj polutvrdi punomasni sir 500g KOM 20</h3>
+            <p class="product-desc">Srednje pakovanje polutvrdog sira, praktično za direktnu prodaju i domaće korišćenje.</p>
+            <div class="product-chips">
+              <span class="chip">500g</span>
+              <span class="chip">KOM 20</span>
+            </div>
+            <a href="#contact" class="product-link">Saznam više →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="about-inner">
+        <div class="about-visual animate-left">
+          <div class="about-img">
+            <img
+              src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=700&auto=format&fit=crop"
+              alt="Farma i priroda oko mlekare GAJ"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-deco" aria-hidden="true">GAJ</div>
+        </div>
+        <div class="about-text animate-right">
+          <span class="section-label">Naša priča</span>
+          <h2 class="section-title" id="about-title">Mlekara GAJ —<br>strast prema kvalitetu</h2>
+          <p class="about-intro">
+            MLEKARA GAJ DOO osnovana je 2021. godine u Čačku, sa jednom jasnom misijom: da stanovnicima regiona ponudi mlečne proizvode kakve su pravili naši preci — bez kompromisa, bez veštačkih dodataka, sa punom odgovornošću prema kvalitetu.
+          </p>
+          <p class="about-intro">
+            Na čelu firme je Radosav Stevanović, čovek koji veruje da se dobar kajmak i pravo mleko ne prave prečicama. Svaki naš proizvod prolazi strogu kontrolu pre nego što stigne do vas.
+          </p>
+          <blockquote class="about-quote">
+            <p>"Napravio sam ovu mlekaraju jer znam kakvo mleko treba biti — onakvo kakvo smo pili odmalena."</p>
+            <cite>— Radosav Stevanović, osnivač i direktor</cite>
+          </blockquote>
+          <div class="farm-image">
+            <img src="gaj-1.png" alt="Mlekara GAJ" loading="lazy" />
+          </div>
+          <div class="timeline animate delay-2">
+            <div class="timeline-item">
+              <div class="timeline-year">2021</div>
+              <div class="timeline-text">Osnivanje MLEKARA GAJ DOO u Čačku</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2022</div>
+              <div class="timeline-text">Proširenje linije proizvoda — sir, pavlaka, jogurt</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2023</div>
+              <div class="timeline-text">Nova prodajna mesta u regionu Čačka</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2024</div>
+              <div class="timeline-text">Povećan kapacitet, isti ukus — isto poverenje</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-year">2025</div>
+              <div class="timeline-text">I dalje rastemo, i dalje bez kompromisa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why" aria-labelledby="why-title">
+      <div class="section-head-center animate" style="max-width:700px;margin:0 auto 60px;">
+        <span class="section-label">Naše vrednosti</span>
+        <h2 class="section-title" id="why-title">Zašto izabrati GAJ?</h2>
+      </div>
+      <div class="why-grid" style="max-width:1300px;margin:0 auto;">
+        <div class="why-card animate">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-4-8-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3 class="why-title">Prirodni sastojci</h3>
+          <p class="why-text">Koristimo isključivo sveže mleko bez ikakvih veštačkih dodataka, bojiva ili konzervansa. Ono što piše — to i dobijate.</p>
+        </div>
+        <div class="why-card animate delay-1">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3 class="why-title">Kontrola kvaliteta</h3>
+          <p class="why-text">Svaka serija prolazi kroz unutrašnju kontrolu pre isporuke. Kvalitet nije opcija — obaveza je prema svakom kupcu.</p>
+        </div>
+        <div class="why-card animate delay-2">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 class="why-title">Sveža isporuka</h3>
+          <p class="why-text">Organizujemo dostavu svežih proizvoda u Čačku i okolini. Pozovite nas i dogovorimo se direktno.</p>
+        </div>
+        <div class="why-card animate delay-3">
+          <div class="why-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="why-title">Direktan kontakt</h3>
+          <p class="why-text">Nismo anonimna firma — iza svakog proizvoda stoji Radosav i tim koji brine o vašem zadovoljstvu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARALLAX BANNER -->
+    <div id="parallax-banner" aria-label="Poziv na akciju">
+      <div class="parallax-bg" aria-hidden="true"></div>
+      <div class="parallax-overlay" aria-hidden="true"></div>
+      <div class="parallax-content animate">
+        <h2>Ukus koji se pamti.</h2>
+        <p>Poručite danas — isporuka na vašu adresu.</p>
+        <a href="tel:+381648010522" class="btn-gold-lg" aria-label="Pozovite nas na +381 64 8010 522">
+          📞 Pozovite: +381 64 8010 522
+        </a>
+      </div>
+    </div>
+
+    <!-- WHERE TO BUY -->
+    <section id="where" aria-labelledby="where-title">
+      <div class="animate" style="max-width:1300px;margin:0 auto 60px;">
+        <span class="section-label">Pronađite nas</span>
+        <h2 class="section-title" id="where-title">Gde kupiti?</h2>
+      </div>
+      <div class="where-inner">
+        <div class="map-container animate-left" aria-label="Mapa lokacije Čačak">
+          <iframe
+            src="https://www.google.com/maps?q=43.87673381090679,20.370266612056675&hl=sr&z=16&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            title="Lokacija Mlekare GAJ, Čačak"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="where-info animate-right">
+          <h3 class="section-title" style="font-size:1.6rem;margin-bottom:12px;">Direktna kupovina</h3>
+          <p class="where-intro">Naše proizvode možete kupiti direktno kontaktiranjem mlekare. Organizujemo isporuku u Čačku i okolini — pozovite nas ili pošaljite poruku.</p>
+          <div class="hours-card">
+            <h4 class="hours-title">🕐 Radno vreme</h4>
+            <div class="hours-row">
+              <span class="hours-day">Ponedeljak – Petak</span>
+              <span class="hours-time">06:00 – 18:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Subota</span>
+              <span class="hours-time">06:00 – 14:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-day">Nedelja</span>
+              <span class="hours-time closed">Zatvoreno</span>
+            </div>
+          </div>
+          <div class="where-note">
+            💡 Za veće količine i ugovorenu isporuku pozovite nas direktno — dogovorimo se.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <div class="contact-left animate-left">
+          <span class="section-label">Pišite nam</span>
+          <h2 class="section-title" id="contact-title">Kontaktirajte nas</h2>
+          <p class="contact-intro">Radujemo se vašem pozivu ili poruci. Odgovaramo brzo, radnim danima od 06 do 18h.</p>
+          <div class="contact-info-list" role="list">
+            <div class="contact-info-item" role="listitem">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.44 2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.41-1.41a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <a href="tel:+381648010522">+381 64 8010 522</a>
+                <span class="contact-info-sub">Pon–Pet: 06–18h, Sub: 06–14h</span>
+              </div>
+            </div>
+            <div class="contact-info-item" role="listitem">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <a href="mailto:mlekaragaj@yahoo.com">mlekaragaj@yahoo.com</a>
+                <span class="contact-info-sub">Odgovaramo u roku 24h</span>
+              </div>
+            </div>
+            <div class="contact-info-item" role="listitem">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-info-text">
+                <span>Čačak, Srbija</span>
+                <span class="contact-info-sub">PIB: 112372355 · MB: 21660213</span>
+              </div>
+            </div>
+          </div>
+          <div class="social-row" aria-label="Pratite nas na društvenim mrežama">
+            <a href="https://www.instagram.com/mlekaragaj/" class="social-icon" aria-label="Instagram profil Mlekare GAJ" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://www.instagram.com/mlekaragaj/" class="social-handle" target="_blank" rel="noopener noreferrer">@mlekaragaj</a>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap animate-right">
+          <form id="contactForm" novalidate aria-label="Kontakt forma">
+            <div class="form-row">
+              <div class="form-group" id="fg-name">
+                <label for="name">Ime i prezime *</label>
+                <input type="text" id="name" name="name" placeholder="Vaše ime" required autocomplete="name" />
+              </div>
+              <div class="form-group" id="fg-email">
+                <label for="email">Email adresa *</label>
+                <input type="email" id="email" name="email" placeholder="vas@email.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Broj telefona</label>
+                <input type="tel" id="phone" name="phone" placeholder="06x xxx xxxx" autocomplete="tel" />
+              </div>
+              <div class="form-group" id="fg-reason">
+                <label for="reason">Razlog kontakta *</label>
+                <select id="reason" name="reason" required>
+                  <option value="">Izaberite razlog...</option>
+                  <option value="order">Porudžbina proizvoda</option>
+                  <option value="quality">Pitanje o kvalitetu</option>
+                  <option value="collab">Poslovna saradnja</option>
+                  <option value="delivery">Dostava i cene</option>
+                  <option value="other">Ostalo</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group honeypot-group" aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; width:1px; height:1px; overflow:hidden;">
+              <label for="website_url">Website</label>
+              <input type="text" id="website_url" name="website_url" autocomplete="off" tabindex="-1" />
+            </div>
+            <div class="form-group" id="fg-msg">
+              <label for="message">Vaša poruka *</label>
+              <textarea id="message" name="message" placeholder="Napišite vašu poruku..." required rows="4"></textarea>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" id="gdpr" name="gdpr" required />
+              <label for="gdpr" style="cursor:none;">Prihvatam obradu ličnih podataka u svrhu odgovora na kontakt poruku, u skladu sa politikom privatnosti.</label>
+            </div>
+            <button type="submit" class="btn-submit" aria-label="Pošaljite poruku">
+              Pošaljite poruku →
+            </button>
+            <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+              <p>✅ Hvala! Radosav će vas kontaktirati uskoro.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">GAJ</div>
+        <div class="footer-brand-sub">Mlekara</div>
+        <p class="footer-tagline">Pravi ukus, od 2021.<br>Autentični mlečni proizvodi iz Čačka.</p>
+        <div class="footer-social" aria-label="Društvene mreže">
+          <a href="https://www.instagram.com/mlekaragaj/" class="footer-social-icon" aria-label="Instagram profil Mlekare GAJ" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Navigacija</h3>
+        <nav class="footer-links" aria-label="Footer navigacija">
+          <a href="#hero">Početna</a>
+          <a href="#products">Naši proizvodi</a>
+          <a href="#about">O nama</a>
+          <a href="#where">Gde kupiti</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+      </div>
+      <div>
+        <h3 class="footer-col-title">Kontakt</h3>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.44 2 2 0 0 1 3.54 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l1.41-1.41a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span><a href="tel:+381648010522" style="color:inherit;transition:color 0.2s;" onmouseenter="this.style.color='#1D4ED8'" onmouseleave="this.style.color='inherit'">+381 64 8010 522</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span><a href="mailto:mlekaragaj@yahoo.com" style="color:inherit;transition:color 0.2s;" onmouseenter="this.style.color='#1D4ED8'" onmouseleave="this.style.color='inherit'">mlekaragaj@yahoo.com</a></span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Čačak, Srbija</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Mlekara GAJ DOO Čačak · PIB: 112372355</p>
+      <a href="#" class="footer-policy">Politika privatnosti</a>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8Mrb_OwgsDW022p0x0hWlhGnPOICe2vY",
+      authDomain: "mlekara-gaj.firebaseapp.com",
+      projectId: "mlekara-gaj",
+      storageBucket: "mlekara-gaj.firebasestorage.app",
+      messagingSenderId: "861130855464",
+      appId: "1:861130855464:web:6770e5b5bd822686ed911d",
+      measurementId: "G-MK688TSJ43"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    // ===================== CUSTOM CURSOR =====================
+    const cursor = document.getElementById('cursor');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
+    });
+
+    (function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    })();
+
+    document.querySelectorAll('a, button, input, select, textarea, .product-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); cursorRing.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); cursorRing.classList.remove('hover'); });
+    });
+
+    // ===================== NAV SCROLL =====================
+    const nav = document.getElementById('nav');
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          nav.classList.toggle('scrolled', window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ===================== HAMBURGER =====================
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    let menuOpen = false;
+
+    function toggleMenu() {
+      menuOpen = !menuOpen;
+      hamburger.classList.toggle('active', menuOpen);
+      hamburger.setAttribute('aria-expanded', menuOpen);
+      if (menuOpen) {
+        mobileMenu.style.display = 'flex';
+        requestAnimationFrame(() => mobileMenu.classList.add('open'));
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu.classList.remove('open');
+        setTimeout(() => { mobileMenu.style.display = 'none'; }, 350);
+        document.body.style.overflow = '';
+      }
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => { if (menuOpen) toggleMenu(); });
+    });
+
+    // ===================== SMOOTH SCROLL =====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ===================== INTERSECTION OBSERVER =====================
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.animate, .animate-left, .animate-right').forEach(el => observer.observe(el));
+
+    // ===================== COUNTER ANIMATION =====================
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 2000;
+      const start = performance.now();
+
+      if (target === 2021) {
+        el.textContent = '2021.';
+        return;
+      }
+
+      function update(time) {
+        const elapsed = time - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current.toLocaleString('sr-RS') + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsSection = document.getElementById('stats');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // ===================== PARALLAX =====================
+    const parallaxBg = document.querySelector('.parallax-bg');
+    function updateParallax() {
+      if (!parallaxBg) return;
+      const rect = document.getElementById('parallax-banner').getBoundingClientRect();
+      const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+      const offset = (progress - 0.5) * 80;
+      parallaxBg.style.transform = `translateY(${offset}px)`;
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax();
+
+    // ===================== FORM VALIDATION =====================
+    const form = document.getElementById('contactForm');
+    const successDiv = document.getElementById('formSuccess');
+
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function setError(groupId, hasError) {
+      const group = document.getElementById(groupId);
+      if (group) group.classList.toggle('error', hasError);
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      const honeypot = document.getElementById('website_url');
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const reason = document.getElementById('reason');
+      const message = document.getElementById('message');
+      const gdpr = document.getElementById('gdpr');
+
+      if (honeypot && honeypot.value.trim() !== '') {
+        console.log('Bot detektovan, prekidam slanje.');
+        return;
+      }
+
+      const nameErr = !name.value.trim() || name.value.trim().length < 2;
+      const emailErr = !email.value.trim() || !validateEmail(email.value.trim());
+      const reasonErr = !reason.value;
+      const msgErr = !message.value.trim() || message.value.trim().length < 5;
+      const gdprErr = !gdpr.checked;
+
+      setError('fg-name', nameErr);
+      setError('fg-email', emailErr);
+      setError('fg-reason', reasonErr);
+      setError('fg-msg', msgErr);
+
+      if (nameErr || emailErr || reasonErr || msgErr || gdprErr) {
+        valid = false;
+        if (gdprErr && !nameErr && !emailErr && !reasonErr && !msgErr) {
+          gdpr.focus();
+        }
+      }
+
+      if (!valid) return;
+
+      // Submit message to Firestore
+      const btn = form.querySelector('.btn-submit');
+      btn.textContent = '⏳ Slanje...';
+      btn.disabled = true;
+
+      try {
+        await addDoc(collection(db, 'messages'), {
+          name: name.value.trim(),
+          email: email.value.trim(),
+          phone: document.getElementById('phone').value.trim(),
+          reason: reason.value,
+          message: message.value.trim(),
+          timestamp: serverTimestamp()
+        });
+
+        btn.textContent = 'Pošaljite poruku →';
+        btn.disabled = false;
+        form.reset();
+        successDiv.classList.add('show');
+        setTimeout(() => successDiv.classList.remove('show'), 5000);
+      } catch (error) {
+        console.error('Greška pri slanju poruke:', error);
+        btn.textContent = 'Pošaljite poruku →';
+        btn.disabled = false;
+        showToast && showToast('Greška pri slanju poruke. Pokušajte ponovo.');
+      }
+    });
+
+    // Clear error on input
+    ['name','email','reason','message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', () => {
+        const fg = el.closest('.form-group');
+        if (fg) fg.classList.remove('error');
+      });
+    });
+
+    // ===================== PAGE LOAD ANIMATION =====================
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.animate, .animate-left, .animate-right').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.95) {
+          el.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
