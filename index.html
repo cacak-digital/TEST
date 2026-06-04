@@ -1029,8 +1029,178 @@
 }
 
 .stat-num {
-    will-change: transform; /* Pomaže kod performansi animacije */
+    will-change: auto; /* Removed will-change: transform — unnecessary for counter text */
 }
+
+    /* ===================== MOBILE PERFORMANCE & OVERFLOW FIXES =====================
+       All rules below are scoped to max-width: 768px.
+       Desktop layout is completely unaffected.
+    ============================================================================= */
+
+    /* --- 1a. Cursor: hide on touch devices (saves significant CPU) --- */
+    @media (pointer: coarse) {
+      .cursor,
+      .cursor-ring {
+        display: none !important;
+      }
+    }
+
+    /* --- 1b. Core overflow containment --- */
+    @media (max-width: 768px) {
+      html,
+      body {
+        width: 100% !important;
+        overflow-x: hidden !important;
+      }
+
+      /* Universal box-sizing + overflow guard for every element */
+      *,
+      *::before,
+      *::after {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* --- 2. Collapse all grid / flex layouts to single column --- */
+
+      /* Hero inner grid */
+      .hero-inner {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Products grid */
+      .products-grid {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Featured product card (spans 2 cols on desktop) */
+      .product-card.featured {
+        grid-column: span 1 !important;
+        grid-template-columns: 1fr !important;
+        display: block !important;
+      }
+
+      /* About section inner grid */
+      .about-inner {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Why-us grid */
+      .why-grid {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Stats grid */
+      .stats-grid {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Where-to-buy inner grid */
+      .where-inner {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* CONTACT: remove the large minmax() columns that cause overflow */
+      .contact-inner {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Contact form row (2 columns → 1) */
+      .form-row {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Footer grid */
+      .footer-grid {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* Generic .grid / .row classes (any utility grids) */
+      .grid,
+      .row {
+        grid-template-columns: 1fr !important;
+        flex-direction: column !important;
+      }
+
+      /* --- 3. Media elements: never overflow their container --- */
+      img,
+      video,
+      iframe,
+      embed,
+      object {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto;
+      }
+
+      /* Keep map iframe at fixed height but full width */
+      .map-container iframe {
+        width: 100% !important;
+        height: 300px;
+      }
+
+      /* Forms and inputs */
+      form,
+      input,
+      select,
+      textarea,
+      button {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* Checkbox should NOT be forced to 100% */
+      input[type="checkbox"],
+      input[type="radio"] {
+        width: auto !important;
+        max-width: none !important;
+      }
+
+      /* --- 4. Parallax: disable fixed attachment on mobile (causes iOS jank) --- */
+      .parallax-bg {
+        background-attachment: scroll !important;
+        /* Remove transform-based parallax override handled in JS;
+           will-change is set to auto so the GPU layer is released */
+        will-change: auto !important;
+        transform: none !important;
+        /* Keep the element positioned but don't let it bleed */
+        inset: 0 !important;
+      }
+
+      /* Hero blobs can overflow on small screens; clip them */
+      .hero-blob-1,
+      .hero-blob-2 {
+        display: none !important;
+      }
+
+      /* Float card: keep inside bounds */
+      .hero-float-card {
+        left: 12px !important;
+        bottom: -10px !important;
+        max-width: calc(100% - 24px) !important;
+      }
+
+      /* Contact form wrapper: don't let padding push it wide */
+      .contact-form-wrap {
+        padding: 24px 16px !important;
+      }
+
+      /* Section padding reduction so content breathes on small screens */
+      section {
+        padding-left: 4% !important;
+        padding-right: 4% !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1733,16 +1903,33 @@
     if (statsSection) statsObserver.observe(statsSection);
 
     // ===================== PARALLAX =====================
+    // Disabled on touch/coarse-pointer devices (phones & tablets) to eliminate
+    // GPU bottleneck and scroll jank caused by JS-driven transform on every scroll event.
     const parallaxBg = document.querySelector('.parallax-bg');
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
     function updateParallax() {
-      if (!parallaxBg) return;
-      const rect = document.getElementById('parallax-banner').getBoundingClientRect();
+      // Bail out on mobile / touch devices — CSS already sets transform: none
+      if (!parallaxBg || isTouchDevice || window.innerWidth <= 768) return;
+      const banner = document.getElementById('parallax-banner');
+      if (!banner) return;
+      const rect = banner.getBoundingClientRect();
       const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
       const offset = (progress - 0.5) * 80;
       parallaxBg.style.transform = `translateY(${offset}px)`;
     }
-    window.addEventListener('scroll', updateParallax, { passive: true });
-    updateParallax();
+
+    if (!isTouchDevice && window.innerWidth > 768) {
+      // Only attach the scroll listener on desktop — no unnecessary listeners on mobile
+      window.addEventListener('scroll', updateParallax, { passive: true });
+      updateParallax();
+    } else {
+      // Ensure no residual inline transform on mobile
+      if (parallaxBg) {
+        parallaxBg.style.transform = 'none';
+        parallaxBg.style.willChange = 'auto';
+      }
+    }
 
     // ===================== FORM VALIDATION =====================
     const form = document.getElementById('contactForm');
